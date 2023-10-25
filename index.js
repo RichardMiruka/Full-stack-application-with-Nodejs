@@ -1,12 +1,18 @@
-const { readFile, readFileSynch, readFileSync } = require('fs');
+const express = require('express');
+const fs = require('fs'); // Import the fs module
 
-const txt = readFileSync('./hello.txt', 'utf8');
-console.log(txt)
+const app = express();
 
-const { readFile } = require('fs').promises;
-async function hello() {
-    const file = await readFile('./hello.txt', 'utf8');
-}
+app.get('/', (request, response) => {
+    fs.readFile('/home.html', 'utf8', (err, html) => { // Use fs.readFile instead of readFile
 
+        if (err) {
+            response.status(500).send('sorry, out of order');
+        }
 
-console.log('do this ASAP')
+        response.send(html);
+    });
+
+});
+
+app.listen(process.env.PORT || 3000, () => console.log('App available on localhost:3000'));
