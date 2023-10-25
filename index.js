@@ -1,7 +1,3 @@
-console.log('global.luckyNum');
-
-global.luckyNum = '23';
-
-console.log(global.luckyNum)
-
-console.log(process.platform)  //Check wether you are using Linux or Windows OS
+process.on('exit', function(){                //callback function
+    console.log("Process has exited");
+})
